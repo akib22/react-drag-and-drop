@@ -1,0 +1,19 @@
+.used-img-card {
+  width: 300px;
+  height: 195px;
+  border-radius: 8px;
+}
+
+.used-img-wrapper {
+  flex-basis: 30%;
+  margin-right: 5px;
+  position: relative;
+}
+
+.utilities-wrapper {
+  display: none;
+}
+
+.used-img-wrapper:hover .utilities-wrapper {
+  display: block;
+}

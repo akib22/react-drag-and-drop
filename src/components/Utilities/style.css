@@ -1,0 +1,126 @@
+.utilities {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.utilities-tab {
+  background: #4A5257;
+  border-radius: 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+}
+
+.utilities-tab > button {
+  color: #ffffffd3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+}
+
+.utilities-content {
+  position: absolute;
+  left: -50%;
+  top: 110%;
+}
+
+.active, .utilities-tab > button:hover {
+  color: #ffffff !important;
+}
+
+.settings, .delete {
+  background-color: #ffffff;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
+  padding: 5px;
+  width: 150px;
+  border-radius: 8px;
+}
+
+.delete {
+  padding: 8px;
+  width: 140px;
+  position: relative;
+}
+
+.delete::before, .settings::before { 
+  content: '';
+  height: 10px;
+  width: 10px;
+  background-color: #fff;
+  position: absolute;
+  left: 58%;
+  top: -5px;
+  transform: rotate(45deg);
+}
+
+.settings::before {
+  left: 33%;
+}
+
+.tab-list {
+  border-bottom: 1px solid #eeeeee;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.tab-list > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #A1A6AA;
+}
+
+.change-img-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #35AEF2;
+  font-size: 14px;
+  padding: 0;
+}
+
+.image {
+  text-align: center;
+}
+
+.image > img {
+  width: 120px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.range {
+  width: 70%;
+}
+
+.output {
+  font-size: 14px;
+  color: #A1A6AA;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid grey;
+  color: grey;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background: transparent;
+  border: 1px solid red;
+  color: red;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.tab-active {
+  color: #000000 !important;
+}

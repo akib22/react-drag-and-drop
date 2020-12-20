@@ -1,0 +1,19 @@
+.img-card {
+  width: 250px;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.img-wrapper {
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+}
+
+.img-wrapper:hover {
+  cursor: pointer;
+  border: 2px solid #63b7f0;
+}
+
+.img-bottom-margin:not(:last-child) {
+  margin-bottom: 8px;
+}
