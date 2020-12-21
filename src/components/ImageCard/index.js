@@ -1,15 +1,29 @@
+import { useDrag } from 'react-dnd';
+import PropTypes from 'prop-types';
 import './style.css';
 
-export default function ImageCard() {
+export default function ImageCard({ id, imgSrc, name }) {
+  const [{ isDragging }, dragRef] = useDrag({
+    item: { type: 'image', id, imgSrc, name },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
   const style = {
-    backgroundImage:
-      'url("https://images.amcnetworks.com/amc.com/wp-content/uploads/2015/04/cast_bb_700x1000_walter-white-lg.jpg")',
+    backgroundImage: `url(${imgSrc})`,
     backgroundSize: 'cover',
   };
+  const draggingStyle = isDragging ? { opacity: 0.5, borderColor: '#fff' } : null;
 
   return (
-    <div className="img-wrapper img-bottom-margin">
-      <div className="img-card " style={style} />
+    <div className="img-wrapper img-bottom-margin" style={draggingStyle}>
+      <div ref={dragRef} className="img-card" style={style} />
     </div>
   );
 }
+
+ImageCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
