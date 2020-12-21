@@ -12,7 +12,7 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
   const [, dropRef] = useDrop({
     accept: 'image',
     hover(item, monitor) {
-      if (!ref.current || !item.id) {
+      if (!ref.current || !item.index) {
         return;
       }
       const dragIndex = item.index;
@@ -73,7 +73,13 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
     >
       <div ref={ref} className="used-img-card" style={{ ...style, opacity }} />
       <div className="utilities-wrapper" styles={{ display: isDragging ? 'none' : 'block' }}>
-        <Utilities hovering={isHovering} droppedImgId={id} imgSrc={imgSrc} styles={styles} />
+        <Utilities
+          hovering={isHovering}
+          droppedImgId={id}
+          imgSrc={imgSrc}
+          styles={styles}
+          index={index}
+        />
       </div>
     </div>
   );
