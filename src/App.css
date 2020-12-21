@@ -77,6 +77,10 @@ button:focus {
   position: absolute;
 }
 
+.grey {
+  color: grey;
+} 
+
 .p-5 {
   padding: 5px;
 }

@@ -2,9 +2,21 @@ import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { sortImage } from '../../store';
 import './style.css';
 import Utilities from '../Utilities';
+
+const ImageCard = styled.div`
+  width: 300px;
+  height: 195px;
+  border-radius: 8px;
+  background: ${(props) => props.backgroundImage};
+  background-size: cover;
+  opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
+  filter: ${(props) =>
+    `blur(${props.filter.blur}px) contrast(${props.filter.contrast}) brightness(${props.filter.brightness})`};
+`;
 
 export default function UsedImgCard({ id, imgSrc, styles, index }) {
   const dispatch = useDispatch();
@@ -56,14 +68,9 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
       isDragging: monitor.isDragging(),
     }),
   });
-  const opacity = isDragging ? 0.5 : 1;
   dragRef(dropRef(ref));
 
   const [isHovering, setHovering] = useState(false);
-  const style = {
-    backgroundImage: `url(${imgSrc})`,
-    backgroundSize: 'cover',
-  };
 
   return (
     <div
@@ -71,8 +78,13 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
       onMouseLeave={() => setHovering(false)}
       className="used-img-wrapper"
     >
-      <div ref={ref} className="used-img-card" style={{ ...style, opacity }} />
-      <div className="utilities-wrapper" styles={{ display: isDragging ? 'none' : 'block' }}>
+      <ImageCard
+        ref={ref}
+        filter={styles}
+        backgroundImage={`url(${imgSrc})`}
+        isDragging={isDragging}
+      />
+      <div className="utilities-wrapper" style={{ display: isDragging && 'none' }}>
         <Utilities
           hovering={isHovering}
           droppedImgId={id}

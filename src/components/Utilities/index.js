@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { MdSettings, MdDelete, MdWbSunny, MdBlurOn } from 'react-icons/md';
-import { removeDroppedImg } from '../../store';
+import { MdSettings, MdDelete, MdWbSunny } from 'react-icons/md';
+import { FaFire, FaTint } from 'react-icons/fa';
+import { removeDroppedImg, updateImgStyles } from '../../store';
 import './style.css';
 
-export default function Utilities({ hovering, droppedImgId, imgSrc, index }) {
+export default function Utilities({ hovering, droppedImgId, imgSrc, index, styles }) {
   const dispatch = useDispatch();
   const [isSettingTabOpen, setSettingTapOpen] = useState(false);
   const [isDeleteTabOpen, setDeleteTabOpen] = useState(false);
@@ -37,6 +38,10 @@ export default function Utilities({ hovering, droppedImgId, imgSrc, index }) {
     setSettingTapOpen(false);
     setDeleteTabOpen(false);
     setWhichTabOpen('image');
+  };
+
+  const handleStyleChange = (val) => {
+    dispatch(updateImgStyles({ index, val }));
   };
 
   return (
@@ -88,34 +93,55 @@ export default function Utilities({ hovering, droppedImgId, imgSrc, index }) {
               ) : (
                 <div className="filter">
                   <div className="flex align-center">
-                    <div className="flex">
+                    <div className="flex output">
+                      <FaTint size={16} />
+                    </div>
+                    <input
+                      className="range"
+                      type="range"
+                      min="0"
+                      max="1"
+                      value={styles.blur}
+                      step="0.1"
+                      onChange={({ target }) =>
+                        handleStyleChange({ blur: parseFloat(target.value, 10) })
+                      }
+                    />
+                    <output className="output">{styles.blur}</output>
+                  </div>
+                  <div className="flex align-center">
+                    <div className="flex output">
                       <MdWbSunny size={16} />
                     </div>
                     <input
                       className="range"
                       type="range"
                       min="0"
-                      max="100"
-                      value="10"
-                      step="1"
-                      onChange={(val) => console.log('log--> ', val.target.value)}
+                      max="3"
+                      value={styles.brightness}
+                      step="0.1"
+                      onChange={({ target }) => {
+                        handleStyleChange({ brightness: parseFloat(target.value, 10) });
+                      }}
                     />
-                    <output className="output">10%</output>
+                    <output className="output">{styles.brightness}</output>
                   </div>
                   <div className="flex align-center">
-                    <div className="flex">
-                      <MdBlurOn size={16} />
+                    <div className="flex output">
+                      <FaFire size={16} />
                     </div>
                     <input
                       className="range"
                       type="range"
                       min="0"
-                      max="100"
-                      value="10"
-                      step="1"
-                      onChange={(val) => console.log('log--> ', val)}
+                      max="3"
+                      value={styles.contrast}
+                      step="0.1"
+                      onChange={({ target }) => {
+                        handleStyleChange({ contrast: parseFloat(target.value, 10) });
+                      }}
                     />
-                    <output className="output">10%</output>
+                    <output className="output">{styles.contrast}</output>
                   </div>
                 </div>
               )}
@@ -145,4 +171,5 @@ Utilities.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   droppedImgId: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
+  styles: PropTypes.shape(),
 };

@@ -26,7 +26,12 @@ const imageSlice = createSlice({
     },
     dropImage: (state, action) => {
       if (state.droppedImages.length === 9) return;
-      state.droppedImages.push({ ...action.payload, styles: {} });
+      const styles = {
+        blur: 0,
+        brightness: 1,
+        contrast: 1,
+      };
+      state.droppedImages.push({ ...action.payload, styles });
     },
     removeDroppedImg: (state, { payload }) => {
       state.droppedImages = state.droppedImages.filter((item, idx) => idx !== payload.index);
@@ -39,6 +44,12 @@ const imageSlice = createSlice({
           [payload.hoverIndex, 0, draggedImg],
         ],
       });
+    },
+    updateImgStyles: (state, { payload }) => {
+      state.droppedImages[payload.index].styles = {
+        ...state.droppedImages[payload.index].styles,
+        ...payload.val,
+      };
     },
   },
 });
@@ -58,6 +69,7 @@ export const {
   dropImage,
   sortImage,
   removeDroppedImg,
+  updateImgStyles,
 } = imageSlice.actions;
 
 export const selector = (state) => state.image;
