@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import update from 'immutability-helper';
+import { loadState, saveState } from '../utils/localStorage';
 
 const initialState = {
   loading: false,
@@ -36,9 +37,13 @@ const imageSlice = createSlice({
         contrast: 1,
       };
       state.droppedImages.push({ ...action.payload, styles });
+      // save data in local storage
+      saveState(state.droppedImages);
     },
     removeDroppedImg: (state, { payload }) => {
       state.droppedImages = state.droppedImages.filter((item, idx) => idx !== payload.index);
+      // save data in local storage
+      saveState(state.droppedImages);
     },
     sortImage: (state, { payload }) => {
       const draggedImg = state.droppedImages[payload.dragIndex];
@@ -48,12 +53,16 @@ const imageSlice = createSlice({
           [payload.hoverIndex, 0, draggedImg],
         ],
       });
+      // save data in local storage
+      saveState(state.droppedImages);
     },
     updateImgStyles: (state, { payload }) => {
       state.droppedImages[payload.index].styles = {
         ...state.droppedImages[payload.index].styles,
         ...payload.val,
       };
+      // save data in local storage
+      saveState(state.droppedImages);
     },
     showModal: (state, { payload }) => {
       state.modalInfo.imageId = payload.imageId;
@@ -67,6 +76,13 @@ const imageSlice = createSlice({
       state.droppedImages[state.modalInfo.imageId].imgSrc = payload.imgSrc;
       state.modalInfo.imageId = null;
       state.modalInfo.showModal = false;
+      // save data in local storage
+      saveState(state.droppedImages);
+    },
+    loadDataFromLocalStorage: (state) => {
+      const data = loadState();
+      if (!data) return;
+      state.droppedImages = data;
     },
   },
 });
@@ -90,6 +106,7 @@ export const {
   showModal,
   closeModal,
   updateImage,
+  loadDataFromLocalStorage,
 } = imageSlice.actions;
 
 export const selector = (state) => state.image;

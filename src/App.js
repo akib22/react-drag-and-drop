@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Canvas from './components/Canvas';
 import MediaPanel from './components/MediaPanel';
-import { fetchImages, selector } from './store';
+import { fetchImages, selector, loadDataFromLocalStorage } from './store';
 import ChangeImgModal from './components/ChangeImgModal';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchImages());
+    dispatch(loadDataFromLocalStorage());
   }, [dispatch]);
 
   if (loading) {
