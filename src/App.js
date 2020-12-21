@@ -16,11 +16,22 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center align-center h-full">
+        <div className="loader" />
+      </div>
+    );
   }
 
   if (hasError) {
-    return <div>Something went wrong</div>;
+    return (
+      <div className="something-went-wrong">
+        <div>
+          <h1>Oops!</h1>
+          <h3>Something went wrong.</h3>
+        </div>
+      </div>
+    );
   }
 
   return (
