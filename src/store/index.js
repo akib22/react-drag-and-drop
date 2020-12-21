@@ -28,8 +28,8 @@ const imageSlice = createSlice({
       if (state.droppedImages.length === 9) return;
       state.droppedImages.push({ ...action.payload, styles: {} });
     },
-    removeDroppedImg: (state, action) => {
-      state.droppedImages = state.droppedImages.filter((item) => item.id !== action.payload.id);
+    removeDroppedImg: (state, { payload }) => {
+      state.droppedImages = state.droppedImages.filter((item, idx) => idx !== payload.index);
     },
     sortImage: (state, { payload }) => {
       const draggedImg = state.droppedImages[payload.dragIndex];

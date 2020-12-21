@@ -1,9 +1,12 @@
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { MdSettings, MdDelete, MdWbSunny, MdBlurOn } from 'react-icons/md';
+import { removeDroppedImg } from '../../store';
 import './style.css';
 
-// eslint-disable-next-line react/prop-types
-export default function UsedImgCard({ hovering }) {
+export default function Utilities({ hovering, droppedImgId, imgSrc, index }) {
+  const dispatch = useDispatch();
   const [isSettingTabOpen, setSettingTapOpen] = useState(false);
   const [isDeleteTabOpen, setDeleteTabOpen] = useState(false);
   const [whichTabOpen, setWhichTabOpen] = useState('image');
@@ -27,6 +30,13 @@ export default function UsedImgCard({ hovering }) {
 
   const onCancel = () => {
     setDeleteTabOpen(false);
+  };
+
+  const onDelete = () => {
+    dispatch(removeDroppedImg({ index }));
+    setSettingTapOpen(false);
+    setDeleteTabOpen(false);
+    setWhichTabOpen('image');
   };
 
   return (
@@ -70,10 +80,7 @@ export default function UsedImgCard({ hovering }) {
             <div className="tab-content">
               {whichTabOpen === 'image' ? (
                 <div className="image">
-                  <img
-                    src="https://vignette.wikia.nocookie.net/breakingbad/images/9/95/JesseS5.jpg/revision/latest?cb=20120620012441"
-                    alt="change"
-                  />
+                  <img src={imgSrc} alt="change" />
                   <button className="change-img-btn" type="button">
                     Change Image
                   </button>
@@ -122,7 +129,7 @@ export default function UsedImgCard({ hovering }) {
               <button type="button" className="cancel-btn" onClick={() => onCancel()}>
                 Cancel
               </button>
-              <button type="button" className="delete-btn">
+              <button type="button" className="delete-btn" onClick={() => onDelete()}>
                 Delete
               </button>
             </div>
@@ -132,3 +139,10 @@ export default function UsedImgCard({ hovering }) {
     </div>
   );
 }
+
+Utilities.propTypes = {
+  hovering: PropTypes.bool.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  droppedImgId: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+};
