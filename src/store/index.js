@@ -6,6 +6,10 @@ const initialState = {
   hasError: false,
   images: [],
   droppedImages: [],
+  modalInfo: {
+    showModal: false,
+    imageId: null,
+  },
 };
 
 const imageSlice = createSlice({
@@ -51,6 +55,19 @@ const imageSlice = createSlice({
         ...payload.val,
       };
     },
+    showModal: (state, { payload }) => {
+      state.modalInfo.imageId = payload.imageId;
+      state.modalInfo.showModal = true;
+    },
+    closeModal: (state) => {
+      state.modalInfo.imageId = null;
+      state.modalInfo.showModal = false;
+    },
+    updateImage: (state, { payload }) => {
+      state.droppedImages[state.modalInfo.imageId].imgSrc = payload.imgSrc;
+      state.modalInfo.imageId = null;
+      state.modalInfo.showModal = false;
+    },
   },
 });
 
@@ -70,6 +87,9 @@ export const {
   sortImage,
   removeDroppedImg,
   updateImgStyles,
+  showModal,
+  closeModal,
+  updateImage,
 } = imageSlice.actions;
 
 export const selector = (state) => state.image;

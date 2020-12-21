@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { MdSettings, MdDelete, MdWbSunny } from 'react-icons/md';
 import { FaFire, FaTint } from 'react-icons/fa';
-import { removeDroppedImg, updateImgStyles } from '../../store';
+import { removeDroppedImg, showModal, updateImgStyles } from '../../store';
 import './style.css';
 
-export default function Utilities({ hovering, droppedImgId, imgSrc, index, styles }) {
+export default function Utilities({ hovering, imgSrc, index, styles }) {
   const dispatch = useDispatch();
   const [isSettingTabOpen, setSettingTapOpen] = useState(false);
   const [isDeleteTabOpen, setDeleteTabOpen] = useState(false);
@@ -86,7 +86,11 @@ export default function Utilities({ hovering, droppedImgId, imgSrc, index, style
               {whichTabOpen === 'image' ? (
                 <div className="image">
                   <img src={imgSrc} alt="change" />
-                  <button className="change-img-btn" type="button">
+                  <button
+                    className="change-img-btn"
+                    type="button"
+                    onClick={() => dispatch(showModal({ imageId: index }))}
+                  >
                     Change Image
                   </button>
                 </div>
@@ -169,7 +173,6 @@ export default function Utilities({ hovering, droppedImgId, imgSrc, index, style
 Utilities.propTypes = {
   hovering: PropTypes.bool.isRequired,
   imgSrc: PropTypes.string.isRequired,
-  droppedImgId: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   styles: PropTypes.shape(),
 };

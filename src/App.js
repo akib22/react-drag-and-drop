@@ -4,10 +4,11 @@ import './App.css';
 import Canvas from './components/Canvas';
 import MediaPanel from './components/MediaPanel';
 import { fetchImages, selector } from './store';
+import ChangeImgModal from './components/ChangeImgModal';
 
 function App() {
   const dispatch = useDispatch();
-  const { loading, hasError } = useSelector(selector);
+  const { loading, hasError, modalInfo } = useSelector(selector);
 
   useEffect(() => {
     dispatch(fetchImages());
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className="flex">
+      {modalInfo.showModal ? <ChangeImgModal /> : null}
       <MediaPanel />
       <Canvas />
     </div>
