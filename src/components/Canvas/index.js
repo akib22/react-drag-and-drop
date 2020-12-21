@@ -15,7 +15,8 @@ export default function Canvas() {
     },
   });
   const { droppedImages } = useSelector(selector);
-  const classNames = droppedImages.length > 0 ? 'canvas' : 'canvas justify-center align-center';
+  const classNames =
+    droppedImages.length > 0 ? 'canvas content-start' : 'canvas justify-center align-center';
 
   const renderImages = () =>
     droppedImages.map((item, idx) => (

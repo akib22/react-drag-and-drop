@@ -73,6 +73,10 @@ button:focus {
   align-items: center;
 }
 
+.content-start {
+  align-content: flex-start;
+}
+
 .absolute {
   position: absolute;
 }

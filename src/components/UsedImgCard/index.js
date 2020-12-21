@@ -8,8 +8,8 @@ import './style.css';
 import Utilities from '../Utilities';
 
 const ImageCard = styled.div`
-  width: 300px;
-  height: 195px;
+  width: inherit;
+  height: inherit;
   border-radius: 8px;
   background: ${(props) => props.backgroundImage};
   background-size: cover;
@@ -77,6 +77,7 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       className="used-img-wrapper"
+      style={{ marginRight: (index + 1) % 3 === 0 ? 0 : '8px' }}
     >
       <ImageCard
         ref={ref}
