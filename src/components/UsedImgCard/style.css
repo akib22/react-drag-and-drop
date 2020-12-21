@@ -6,6 +6,7 @@
 
 .used-img-wrapper {
   flex-basis: 30%;
+  height: 195px;
   margin-right: 5px;
   position: relative;
 }

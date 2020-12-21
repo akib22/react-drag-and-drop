@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import update from 'immutability-helper';
 
 const initialState = {
   loading: false,
@@ -23,6 +24,22 @@ const imageSlice = createSlice({
       state.loading = false;
       state.hasError = true;
     },
+    dropImage: (state, action) => {
+      if (state.droppedImages.length === 9) return;
+      state.droppedImages.push({ ...action.payload, styles: {} });
+    },
+    removeDroppedImg: (state, action) => {
+      state.droppedImages = state.droppedImages.filter((item) => item.id !== action.payload.id);
+    },
+    sortImage: (state, { payload }) => {
+      const draggedImg = state.droppedImages[payload.dragIndex];
+      state.droppedImages = update(state.droppedImages, {
+        $splice: [
+          [payload.dragIndex, 1],
+          [payload.hoverIndex, 0, draggedImg],
+        ],
+      });
+    },
   },
 });
 
@@ -34,7 +51,14 @@ const store = configureStore({
   },
 });
 
-export const { getImages, getImagesSuccess, getImagesFailed } = imageSlice.actions;
+export const {
+  getImages,
+  getImagesSuccess,
+  getImagesFailed,
+  dropImage,
+  sortImage,
+  removeDroppedImg,
+} = imageSlice.actions;
 
 export const selector = (state) => state.image;
 
