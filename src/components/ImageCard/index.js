@@ -17,7 +17,7 @@ export default function ImageCard({ id, imgSrc, name }) {
 
   return (
     <div className="img-wrapper img-bottom-margin" style={draggingStyle}>
-      <div ref={dragRef} className="img-card" style={style} />
+      <div data-testid="img-card" ref={dragRef} className="img-card" style={style} />
     </div>
   );
 }
