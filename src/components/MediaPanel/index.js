@@ -7,7 +7,7 @@ import { selector } from '../../store';
 export default function Canvas() {
   const { images } = useSelector(selector);
   return (
-    <div className="media-panel">
+    <div data-testid="media-panel" className="media-panel">
       <span className="panel-title">Media Panel</span>
       <div>
         {images.map(({ name, char_id, img }) => (

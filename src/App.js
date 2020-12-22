@@ -17,7 +17,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex justify-center align-center h-full">
+      <div data-testid="loader" className="flex justify-center align-center h-full">
         <div className="loader" />
       </div>
     );
