@@ -211,4 +211,16 @@ const images = [
   },
 ];
 
-export default { images };
+const droppedImg = {
+  id: 1,
+  imgSrc:
+    'https://images.amcnetworks.com/amc.com/wp-content/uploads/2015/04/cast_bb_700x1000_walter-white-lg.jpg',
+  name: 'Walter White',
+  styles: {
+    blur: 0,
+    brightness: 1,
+    contrast: 1,
+  },
+};
+
+export default { images, droppedImg };

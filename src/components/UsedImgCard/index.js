@@ -74,6 +74,7 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
 
   return (
     <div
+      data-testid="dropped-img"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       className="used-img-wrapper"
@@ -84,8 +85,13 @@ export default function UsedImgCard({ id, imgSrc, styles, index }) {
         filter={styles}
         backgroundImage={`url(${imgSrc})`}
         isDragging={isDragging}
+        data-testid="dropped-img-card"
       />
-      <div className="utilities-wrapper" style={{ display: isDragging && 'none' }}>
+      <div
+        data-testid="utilities-wrapper"
+        className="utilities-wrapper"
+        style={{ display: isDragging && 'none' }}
+      >
         <Utilities
           hovering={isHovering}
           droppedImgId={id}

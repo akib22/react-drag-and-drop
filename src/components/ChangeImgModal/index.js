@@ -18,6 +18,7 @@ export default function ChangeImgModal() {
           key={item.name}
           role="button"
           aria-hidden="true"
+          data-testid="changeable-img"
           className={
             item.img === selectedImg ? 'img-container active-selected-img' : 'img-container'
           }
@@ -36,7 +37,12 @@ export default function ChangeImgModal() {
         </div>
         <div className="modal-body">{renderImage()}</div>
         <div className="modal-footer">
-          <button onClick={() => dispatch(closeModal())} className="close-btn" type="button">
+          <button
+            data-testid="cancel-btn"
+            onClick={() => dispatch(closeModal())}
+            className="close-btn"
+            type="button"
+          >
             Cancel
           </button>
           <button

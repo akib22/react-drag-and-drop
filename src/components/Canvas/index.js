@@ -30,8 +30,8 @@ export default function Canvas() {
     ));
 
   return (
-    <div data-testid="canvas" className="canvas-container">
-      <div ref={dropRef} className={classNames}>
+    <div data-testid="canvas-container" className="canvas-container">
+      <div data-testid="canvas" ref={dropRef} className={classNames}>
         {droppedImages.length === 0 ? (
           <div className="show-info">
             <div className="flex justify-center">

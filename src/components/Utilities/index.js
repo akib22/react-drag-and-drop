@@ -45,12 +45,13 @@ export default function Utilities({ hovering, imgSrc, index, styles }) {
   };
 
   return (
-    <div className="utilities">
+    <div data-testid="utilities" className="utilities">
       <div className="utilities-tab">
         <button
           className={`${isSettingTabOpen ? 'active' : ''}`}
           onClick={() => handleSettingTab()}
           type="button"
+          name="settings"
         >
           <MdSettings />
         </button>
@@ -59,6 +60,7 @@ export default function Utilities({ hovering, imgSrc, index, styles }) {
           className={`${isDeleteTabOpen ? 'active' : ''}`}
           onClick={() => handleDeleteTab()}
           type="button"
+          name="delete"
         >
           <MdDelete />
         </button>
@@ -91,7 +93,7 @@ export default function Utilities({ hovering, imgSrc, index, styles }) {
                     type="button"
                     onClick={() => dispatch(showModal({ imageId: index }))}
                   >
-                    Change Image
+                    Change image
                   </button>
                 </div>
               ) : (
